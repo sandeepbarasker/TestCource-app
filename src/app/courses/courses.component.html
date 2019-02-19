@@ -1,0 +1,57 @@
+<h1>Angular</h1>
+<h2>{{title}}</h2>
+<button (click)="onAdd()">Add</button>  
+<ul>
+  <li *ngFor="let course of courses">
+  {{course}}
+  <button (click)="onRemove(course)">Remove</button>
+</li>
+</ul>
+<!-- <input type="text" [value]="email" (keyUp.Enter)="email = $event.target.value; keyUp()"> -->
+<input type="text" [(ngModel)]="email" (keyUp.Enter)="keyUpMethod()"> <br/>
+<div *ngIf="courses.length >0; then listCourses else nocourse "></div>
+<ng-template #listCourses>
+{{coursedata.sid }}<br/>
+{{coursedata.sname | uppercase}}<br/>
+{{coursedata.sage}}<br/>
+{{coursedata.fee | currency:'AUD'}}<br/>
+{{coursedata.discount | number:'2.3-3'}}<br/>
+{{coursedata.dob | date }} <br/>
+<p ng-model="warning">{{text | summary:'20'}}</p>
+</ng-template>
+<ng-template #nocourse>
+ No courses are avilable
+</ng-template>
+
+
+<form #f= "ngForm">
+<div class="form-group">
+  
+  <label for="courseName">Enter Course Name</label>
+  <input type="text" maxlength="20" pattern="[a-zA-Z \d+]*" required id="courseName" ngModel name="courseName" #courseName="ngModel"(change)="log(courseName)" class="form-control"></div>
+
+  <div class="alert alert-danger" *ngIf="courseName.touched && courseName.invalid" >
+    <div *ngIf="courseName.errors.required" class="required-error">Course Name required</div>
+    <div *ngIf="courseName.errors.maxlength"class="maxlength-error">Max length of name {{courseName.errors.maxlength.requiredLength}}</div>
+    <div *ngIf="courseName.errors.pattern" class="pattern-error"> No spacial character supported </div>
+  </div> 
+
+  <div class="form-group">
+    <label for="category">Course Category</label>
+    <select ngModel name="category" required id="category" #category="ngModel" class="form-control">
+      <option *ngFor="let cat of courseCategory" [ngValue]="cat.id">{{cat.name}}</option>
+     
+    </select>
+  </div>
+  <div class="alert alert-danger" *ngIf="category.touched && category.invalid">
+    <div *ngIf="category.errors.required">Category required</div>
+  </div>
+  <div class="checkbox" > 
+    <label for="moneyBackGuarantee"><input type="checkbox" required ngModel name="monyBackGuarntee" #monyBackGuarntee="ngModel" >
+      30 days money back guarantee</label>
+    </div>
+    <div class="alert alert-danger" *ngIf="monyBackGuarntee.untouched && monyBackGuarntee.invalid">
+      <div *ngIf= "monyBackGuarntee.errors.required"> check money back guarantee box </div>
+    </div>
+    <p>{{f.value|json}}</p>
+    </form>

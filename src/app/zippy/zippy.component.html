@@ -1,0 +1,17 @@
+<div class="zippy">
+  <div class="zippy-heading"
+  [class.expanded]= "isExpanded"
+  (click)="toggle()"
+  >
+    {{title}}
+    <mat-icon *ngIf="!isExpanded" svgIcon="exPendIcon" class="glyphicon"></mat-icon>
+    <mat-icon *ngIf="isExpanded"svgIcon="upicon" class="glyphicon"></mat-icon>
+   <span 
+  
+   ></span>
+  
+  </div>
+  <div *ngIf="isExpanded" class="zippy-body">
+    <ng-content></ng-content>
+  </div>
+</div>

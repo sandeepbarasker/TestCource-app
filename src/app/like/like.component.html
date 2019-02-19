@@ -1,0 +1,24 @@
+<br />
+<span class="d-icon-star_o" [class.highlighted]="isActive" (click)="onClick()">
+</span>
+<span>{{likesCount}}</span>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <ng-content select=".heading"></ng-content>
+    </div>
+    <div class="panel-body">
+        <ng-content select=".body"> </ng-content>
+    </div>
+    <!-- <button [style.backgroundColor]= "canSave ? 'blue':'red'"
+  [style.color] ="canSave ? 'white' :'black'"
+  [style.fontWeight] ="canSave ? 'bold' : 'normal'"  
+  [ngStyle] ="{
+      'backgroundColor':canSave ?'blue':'red',
+      'color':canSave ?'white':'black'
+  }"
+  >
+  SaveBTN 
+</button>-->
+    <span> {{task.assignee?.name}}</span>
+</div>
